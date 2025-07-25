@@ -1,0 +1,22 @@
+{
+  "name": "chronicler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "frontend:start": "npm run start --workspace=frontend",
+    "frontend:test": "npm run test --workspace=frontend",
+    "frontend:build": "npm run build --workspace=frontend",
+    "backend:dev": "npm run dev --workspace=backend",
+    "backend:start": "npm run start --workspace=backend",
+    "backend:test": "npm run test --workspace=backend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ]
+}
