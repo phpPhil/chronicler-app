@@ -1,6 +1,10 @@
 # Node modules
 node_modules/
 
+# AI PRPs and agentic workflow
+.claude/
+.enaiblelabs/
+
 # Logs
 npm-debug.log*
 yarn-debug.log*

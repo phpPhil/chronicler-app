@@ -1,0 +1,35 @@
+{
+  "buttons": {
+    "browse": "ennin",
+    "tryAgain": "Athrabeth Vuin",
+    "calculateNew": "Gonnad Sin",
+    "exportCsv": "Toltho CSV",
+    "exportJson": "Toltho JSON"
+  },
+  "states": {
+    "uploading": "orthor",
+    "calculating": "govannen",
+    "completed": "end",
+    "loading": "Daer...",
+    "processing": "Govannen...",
+    "validating": "Gorthad teithant...",
+    "ready": "Orthad en adar",
+    "success": "Redh",
+    "error": "Gorth"
+  },
+  "units": {
+    "bytes": "Baib",
+    "kb": "KB", 
+    "mb": "MB",
+    "gb": "GB",
+    "ms": "vilui",
+    "pairs": "tîr",
+    "processed": "orthant"
+  },
+  "accessibility": {
+    "uploadZone": "Rond ortho. Thúrin ha leithin {{fileTypes}} teithant hain, egor duin ennin.",
+    "progressBar": "Orthad daer",
+    "calculating": "Govannen far",
+    "tableBreakdown": "Govannen tîr far orthant"
+  }
+}

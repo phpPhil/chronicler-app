@@ -1,0 +1,16 @@
+{
+  "title": "Chronicler",
+  "subtitle": "Submit your chronicle document for precise list reconciliation and distance calculation",
+  "header": {
+    "sindarinToggle": "Sindarin",
+    "hobbitishToggle": "Hobbitish"
+  },
+  "workflow": {
+    "step": "Step",
+    "progress": "Progress"
+  },
+  "error": {
+    "title": "Chronicle Processing Error",
+    "calculationError": "Analysis Processing Error"
+  }
+}

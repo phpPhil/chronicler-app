@@ -1,0 +1,14 @@
+{
+  "api": {
+    "connectionError": "Unable to establish chronicle repository connection",
+    "timeout": "Chronicle processing request exceeded time limit",
+    "serverError": "Internal chronicle processing error",
+    "badRequest": "Invalid chronicle submission format"
+  },
+  "validation": {
+    "missingFile": "Chronicle document not provided",
+    "invalidFileFormat": "Invalid chronicle document format",
+    "emptyFile": "Chronicle document contains no data",
+    "invalidData": "Invalid chronicle data structure"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "title": "Document Repository",
+  "instructions": {
+    "dragDrop": "Submit chronicle document via direct placement",
+    "tapToSelect": "Tap to select your file",
+    "orClickHere": "or click anywhere in this area to select a file",
+    "orBrowse": "or {{browseLink}} to select from repository",
+    "orText": "or",
+    "toSelect": "to select from repository"
+  },
+  "fileInfo": {
+    "preview": "Preview:",
+    "previewEllipsis": "..."
+  },
+  "requirements": {
+    "acceptedFormats": "Acceptable chronicle formats: {{formats}}",
+    "maxSize": "Document size limit: {{size}}",
+    "formatDescription": "Chronicle must contain dual numerical sequences separated by whitespace"
+  },
+  "progress": {
+    "uploaded": "{{percent}}% uploaded"
+  },
+  "status": {
+    "uploadSuccess": "Chronicle document successfully archived!",
+    "validationFailed": "Chronicle validation failed: {{error}}"
+  },
+  "validation": {
+    "invalidFileType": "Please select a {{types}} chronicle document.",
+    "fileTooLarge": "Chronicle document must not exceed {{maxSize}}.",
+    "invalidFormat": "Chronicle must contain precisely two numerical sequences separated by whitespace."
+  },
+  "screenReader": {
+    "validFile": "Chronicle document validated and prepared for archival.",
+    "uploadComplete": "Document archival completed successfully.",
+    "uploadProgress": "Archiving chronicle... {{percent}}% complete"
+  }
+}

@@ -1,38 +1,334 @@
+/* Import Elvish Brand System */
+@import './styles/brand-system.css';
+
+/* ===== CHRONICLER APPLICATION - ELVISH PROFESSIONAL STANDARDS ===== */
+
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--mithril-white), var(--starlight));
 }
 
-.App-logo {
-  height: 40vmin;
+/* ===== SCHOLARLY HEADER - RIVENDELL APPROACH ===== */
+
+.App-header {
+  /* Elvish Professional Header Styling */
+  background: linear-gradient(135deg, var(--rivendell-blue), var(--rivendell-blue-light));
+  padding: var(--spacing-xl) var(--spacing-md);
+  color: var(--mithril-white);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  
+  /* Professional shadow for depth */
+  box-shadow: var(--shadow-rivendell);
+}
+
+/* Subtle background pattern for elvish aesthetic */
+.App-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    transparent 30%, 
+    rgba(248, 248, 255, 0.05) 50%, 
+    transparent 70%
+  );
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App-header .header-content {
+  position: relative;
+  z-index: 1;
+  max-width: var(--breakpoint-desktop);
+  margin: 0 auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Application Title - Professional Standards */
+.App-header h1 {
+  font-family: var(--font-westron-clear);
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  margin: 0 0 var(--spacing-sm) 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.025em;
+}
+
+/* Scholarly Subtitle */
+.App-header p {
+  font-family: var(--font-westron-clear);
+  font-size: var(--font-size-body-primary);
+  line-height: var(--line-height-relaxed);
+  margin: 0 auto;
+  max-width: 700px;
+  opacity: 0.95;
+  font-weight: var(--font-weight-normal);
+}
+
+/* Language Toggle in Header */
+.App-header .language-toggle-container {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+}
+
+/* ===== MAIN CONTENT AREA - SCHOLARLY WORKSPACE ===== */
+
+.App-main {
+  flex: 1;
+  padding: var(--spacing-xxl) var(--spacing-md);
+  background: linear-gradient(180deg, 
+    var(--starlight) 0%, 
+    var(--mithril-white) 100%
+  );
+  position: relative;
+}
+
+/* Workflow Progress Indicator */
+.workflow-progress {
+  max-width: 600px;
+  margin: 0 auto var(--spacing-lg) auto;
+  padding: var(--spacing-md);
+  background: var(--mithril-white);
+  border: 1px solid var(--mallorn-gold);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-subtle);
+  text-align: center;
+}
+
+.workflow-progress p {
+  font-family: var(--font-westron-clear);
+  font-size: var(--font-size-body-detail);
+  color: var(--forest-shadow);
+  margin: var(--spacing-xs) 0;
+}
+
+.workflow-progress p:first-child {
+  font-weight: var(--font-weight-medium);
+  color: var(--rivendell-blue);
+}
+
+/* ===== ERROR DISPLAY - ELVISH RESTRAINT ===== */
+
+.error-display {
+  max-width: 600px;
+  margin: var(--spacing-lg) auto;
+  padding: var(--spacing-md);
+  background: linear-gradient(135deg, var(--mithril-white), var(--info-crystal));
+  border: 1px solid var(--error-crimson);
+  border-left: 4px solid var(--error-crimson);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-standard);
+  text-align: left;
+}
+
+.error-display h2 {
+  font-family: var(--font-westron-clear);
+  font-size: var(--font-size-h3);
+  color: var(--error-crimson);
+  margin: 0 0 var(--spacing-sm) 0;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.error-display h2::before {
+  content: '⚠️';
+  font-size: 1.25em;
+}
+
+.error-display p {
+  font-family: var(--font-westron-clear);
+  font-size: var(--font-size-body-standard);
+  line-height: var(--line-height-relaxed);
+  color: var(--forest-shadow);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.error-display button {
+  background: linear-gradient(135deg, var(--rivendell-blue), var(--rivendell-blue-light));
+  color: var(--mithril-white);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: var(--font-westron-clear);
+  font-size: var(--font-size-body-standard);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-standard);
+  box-shadow: var(--shadow-subtle);
+}
+
+.error-display button:hover {
+  background: linear-gradient(135deg, var(--rivendell-blue-dark), var(--rivendell-blue));
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-standard);
+}
+
+.error-display button:active {
+  transform: translateY(0);
+}
+
+.error-display button:focus {
+  outline: 2px solid var(--rivendell-blue);
+  outline-offset: 2px;
+}
+
+/* ===== UPLOAD SUCCESS - SCHOLARLY CONFIRMATION ===== */
+
+.upload-success {
+  max-width: 600px;
+  margin: var(--spacing-xl) auto;
+  padding: var(--spacing-lg);
+  background: linear-gradient(135deg, var(--mithril-white), var(--starlight));
+  border: 1px solid var(--success-leaf);
+  border-left: 4px solid var(--mallorn-gold);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-standard);
+  text-align: center;
+  position: relative;
+}
+
+/* Scholarly decoration */
+.upload-success::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--mallorn-gold), var(--rivendell-blue));
+}
+
+.upload-success h2 {
+  font-family: var(--font-westron-clear);
+  font-size: var(--font-size-h3);
+  color: var(--success-leaf);
+  margin: 0 0 var(--spacing-sm) 0;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: var(--spacing-xs);
 }
 
-.App-link {
-  color: #61dafb;
+.upload-success h2::before {
+  content: '✨';
+  font-size: 1.25em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.upload-success p {
+  font-family: var(--font-westron-clear);
+  font-size: var(--font-size-body-standard);
+  color: var(--forest-shadow);
+  margin: var(--spacing-xs) 0;
+  line-height: var(--line-height-relaxed);
+}
+
+/* ===== RESPONSIVE DESIGN - PROFESSIONAL STANDARDS ===== */
+
+/* Tablet Workspace */
+@media (max-width: 1024px) {
+  .App-header {
+    padding: var(--spacing-lg) var(--spacing-md);
   }
-  to {
-    transform: rotate(360deg);
+  
+  .App-main {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+}
+
+/* Mobile Professional */
+@media (max-width: 768px) {
+  .App-header {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+  
+  .App-header h1 {
+    font-size: var(--font-size-h2);
+  }
+  
+  .App-header p {
+    font-size: var(--font-size-body-standard);
+  }
+  
+  .App-header .language-toggle-container {
+    position: static;
+    margin-top: var(--spacing-md);
+    display: flex;
+    justify-content: center;
+  }
+  
+  .App-main {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+  
+  .workflow-progress,
+  .error-display,
+  .upload-success {
+    margin-left: var(--spacing-sm);
+    margin-right: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
+}
+
+/* Small Mobile - Compact Professional */
+@media (max-width: 480px) {
+  .App-header h1 {
+    font-size: var(--font-size-h3);
+  }
+  
+  .App-header p {
+    font-size: var(--font-size-body-detail);
+  }
+  
+  .App-main {
+    padding: var(--spacing-md) var(--spacing-xs);
+  }
+}
+
+/* ===== HIGH CONTRAST MODE SUPPORT ===== */
+@media (prefers-contrast: high) {
+  .App-header {
+    background: var(--rivendell-blue);
+    border-bottom: 2px solid var(--forest-shadow);
+  }
+  
+  .error-display,
+  .upload-success {
+    border-width: 2px;
+  }
+}
+
+/* ===== REDUCED MOTION SUPPORT ===== */
+@media (prefers-reduced-motion: reduce) {
+  .App-header,
+  .error-display button,
+  .upload-success {
+    transition: none;
+  }
+  
+  .error-display button:hover,
+  .upload-success:hover {
+    transform: none;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .App-header {
+    background: none;
+    color: black;
+    border-bottom: 2px solid black;
+  }
+  
+  .workflow-progress,
+  .error-display,
+  .upload-success {
+    box-shadow: none;
+    border: 1px solid black;
   }
 }

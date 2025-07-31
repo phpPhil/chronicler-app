@@ -1,0 +1,24 @@
+{
+  "api": {
+    "fileNotProvided": "Pennas teithant úan",
+    "invalidFileFormat": "Pennas celorn gûr",
+    "fileEmpty": "Pennas teithant lost",
+    "fileTooLarge": "Pennas teithant bar daer",
+    "parsingError": "Ú-garo orchad pennas thain",
+    "calculationError": "Far govannen farn",
+    "internalError": "Belain govannen gorth orthant",
+    "networkError": "Rond agarth gorth",
+    "timeout": "Pennas govannen lû farn"
+  },
+  "validation": {
+    "invalidData": "Pennas orthad celorn gûr",
+    "insufficientData": "Orthad luin an govannen",
+    "corruptedFile": "Pennas teithant sarch",
+    "unsupportedFormat": "Pennas celorn ú-orthad"
+  },
+  "processing": {
+    "analysisInterrupted": "Far govannen prestant",
+    "memoryExceeded": "Govad vilui daer farn",
+    "unexpectedError": "Govannen gorth ú-nedui"
+  }
+}

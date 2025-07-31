@@ -1,0 +1,14 @@
+{
+  "api": {
+    "connectionError": "Ú-garo thant sui rond",
+    "timeout": "Agarth lû farn",
+    "serverError": "Rond belain gorth",
+    "badRequest": "Agarth celorn gûr"
+  },
+  "validation": {
+    "missingFile": "Teithant úan",
+    "invalidFileFormat": "Teithant celorn gûr",
+    "emptyFile": "Teithant lost",
+    "invalidData": "Orthad celorn gûr"
+  }
+}

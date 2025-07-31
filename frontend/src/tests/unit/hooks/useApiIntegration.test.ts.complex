@@ -1,0 +1,422 @@
+import { renderHook, act } from '@testing-library/react';
+import { useFileUpload, useDistanceCalculation, useHealthCheck } from '../../../hooks/useApiIntegration';
+import { UploadResult, DistanceCalculationResult, HealthStatus } from '../../../types/api';
+
+// Mock the API client methods
+jest.mock('../../../services/ChroniclerApiClient', () => {
+  const mockUploadFile = jest.fn();
+  const mockCalculateDistance = jest.fn();
+  const mockHealthCheck = jest.fn();
+  
+  return {
+    ChroniclerApiClient: jest.fn().mockImplementation(() => ({
+      uploadFile: mockUploadFile,
+      calculateDistance: mockCalculateDistance,
+      healthCheck: mockHealthCheck,
+    })),
+    // Export the mocks so we can access them in tests
+    __mocks: {
+      mockUploadFile,
+      mockCalculateDistance,
+      mockHealthCheck,
+    }
+  };
+});
+
+// Get access to the mocked functions
+const { ChroniclerApiClient } = require('../../../services/ChroniclerApiClient');
+const mockInstance = new ChroniclerApiClient();
+const mockUploadFile = mockInstance.uploadFile;
+const mockCalculateDistance = mockInstance.calculateDistance;
+const mockHealthCheck = mockInstance.healthCheck;
+
+describe('useFileUpload hook', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('initial state is correct', () => {
+    const { result } = renderHook(() => useFileUpload());
+
+    expect(result.current.loading).toBe(false);
+    expect(result.current.progress).toBe(0);
+    expect(result.current.result).toBeNull();
+    expect(result.current.error).toBeNull();
+    expect(typeof result.current.uploadFile).toBe('function');
+  });
+
+  test('handles successful file upload', async () => {
+    const mockFile = new File(['1 2\n3 4\n'], 'test.txt');
+    const mockResult: UploadResult = {
+      success: true,
+      fileId: 'file-123',
+      message: 'Upload successful',
+      data: {
+        list1: [1, 3],
+        list2: [2, 4],
+        rowCount: 2
+      }
+    };
+
+    mockUploadFile.mockResolvedValueOnce(mockResult);
+
+    const { result } = renderHook(() => useFileUpload());
+
+    await act(async () => {
+      await result.current.uploadFile(mockFile);
+    });
+
+    expect(result.current.loading).toBe(false);
+    expect(result.current.result).toEqual(mockResult);
+    expect(result.current.error).toBeNull();
+    expect(result.current.progress).toBe(100);
+  });
+
+  test('handles file upload progress updates', async () => {
+    const mockFile = new File(['1 2\n3 4\n'], 'test.txt');
+    const mockResult: UploadResult = {
+      success: true,
+      fileId: 'file-123',
+      data: { list1: [1, 3], list2: [2, 4], rowCount: 2 }
+    };
+
+    mockUploadFile.mockImplementation((file, onProgress) => {
+      // Simulate progress updates
+      if (onProgress) {
+        setTimeout(() => onProgress(25), 10);
+        setTimeout(() => onProgress(50), 20);
+        setTimeout(() => onProgress(75), 30);
+      }
+      return Promise.resolve(mockResult);
+    });
+
+    const { result } = renderHook(() => useFileUpload());
+
+    await act(async () => {
+      await result.current.uploadFile(mockFile);
+    });
+
+    expect(mockApiClient.uploadFile).toHaveBeenCalledWith(
+      mockFile,
+      expect.any(Function)
+    );
+  });
+
+  test('handles file upload error', async () => {
+    const mockFile = new File(['invalid'], 'test.txt');
+    const mockError = new Error('Upload failed');
+
+    mockUploadFile.mockRejectedValueOnce(mockError);
+
+    const { result } = renderHook(() => useFileUpload());
+
+    await act(async () => {
+      await result.current.uploadFile(mockFile);
+    });
+
+    expect(result.current.loading).toBe(false);
+    expect(result.current.result).toBeNull();
+    expect(result.current.error).toEqual(mockError);
+    expect(result.current.progress).toBe(0);
+  });
+
+  test('sets loading state during upload', async () => {
+    const mockFile = new File(['1 2\n3 4\n'], 'test.txt');
+    let resolveUpload: (value: UploadResult) => void;
+    
+    const uploadPromise = new Promise<UploadResult>((resolve) => {
+      resolveUpload = resolve;
+    });
+
+    mockUploadFile.mockReturnValueOnce(uploadPromise);
+
+    const { result } = renderHook(() => useFileUpload());
+
+    act(() => {
+      result.current.uploadFile(mockFile);
+    });
+
+    expect(result.current.loading).toBe(true);
+    expect(result.current.error).toBeNull();
+
+    await act(async () => {
+      resolveUpload({
+        success: true,
+        fileId: 'file-123',
+        data: { list1: [1, 3], list2: [2, 4], rowCount: 2 }
+      });
+      await uploadPromise;
+    });
+
+    expect(result.current.loading).toBe(false);
+  });
+
+  test('clears previous errors on new upload', async () => {
+    const mockFile = new File(['test'], 'test.txt');
+    
+    mockApiClient.uploadFile
+      .mockRejectedValueOnce(new Error('First error'))
+      .mockResolvedValueOnce({
+        success: true,
+        fileId: 'file-123',
+        data: { list1: [1], list2: [2], rowCount: 1 }
+      });
+
+    const { result } = renderHook(() => useFileUpload());
+
+    // First upload fails
+    await act(async () => {
+      await result.current.uploadFile(mockFile);
+    });
+
+    expect(result.current.error).toBeTruthy();
+
+    // Second upload succeeds
+    await act(async () => {
+      await result.current.uploadFile(mockFile);
+    });
+
+    expect(result.current.error).toBeNull();
+    expect(result.current.result).toBeTruthy();
+  });
+});
+
+describe('useDistanceCalculation hook', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('initial state is correct', () => {
+    const { result } = renderHook(() => useDistanceCalculation());
+
+    expect(result.current.loading).toBe(false);
+    expect(result.current.result).toBeNull();
+    expect(result.current.error).toBeNull();
+    expect(typeof result.current.calculateDistance).toBe('function');
+  });
+
+  test('handles successful distance calculation', async () => {
+    const mockInput = { list1: [3, 1], list2: [4, 2] };
+    const mockResult: DistanceCalculationResult = {
+      totalDistance: 2,
+      pairs: [
+        { position: 0, list1Value: 1, list2Value: 2, distance: 1 },
+        { position: 1, list1Value: 3, list2Value: 4, distance: 1 }
+      ],
+      metadata: {
+        originalList1Length: 2,
+        originalList2Length: 2,
+        processingTimeMs: 1.234
+      }
+    };
+
+    mockCalculateDistance.mockResolvedValueOnce(mockResult);
+
+    const { result } = renderHook(() => useDistanceCalculation());
+
+    await act(async () => {
+      await result.current.calculateDistance(mockInput);
+    });
+
+    expect(result.current.loading).toBe(false);
+    expect(result.current.result).toEqual(mockResult);
+    expect(result.current.error).toBeNull();
+    expect(mockCalculateDistance).toHaveBeenCalledWith(mockInput);
+  });
+
+  test('handles calculation error', async () => {
+    const mockInput = { list1: [1], list2: [2, 3] }; // Unequal lengths
+    const mockError = new Error('Input arrays must have equal length');
+
+    mockCalculateDistance.mockRejectedValueOnce(mockError);
+
+    const { result } = renderHook(() => useDistanceCalculation());
+
+    await act(async () => {
+      await result.current.calculateDistance(mockInput);
+    });
+
+    expect(result.current.loading).toBe(false);
+    expect(result.current.result).toBeNull();
+    expect(result.current.error).toEqual(mockError);
+  });
+
+  test('sets loading state during calculation', async () => {
+    const mockInput = { list1: [1, 2], list2: [3, 4] };
+    let resolveCalculation: (value: DistanceCalculationResult) => void;
+    
+    const calculationPromise = new Promise<DistanceCalculationResult>((resolve) => {
+      resolveCalculation = resolve;
+    });
+
+    mockCalculateDistance.mockReturnValueOnce(calculationPromise);
+
+    const { result } = renderHook(() => useDistanceCalculation());
+
+    act(() => {
+      result.current.calculateDistance(mockInput);
+    });
+
+    expect(result.current.loading).toBe(true);
+    expect(result.current.error).toBeNull();
+
+    await act(async () => {
+      resolveCalculation({
+        totalDistance: 4,
+        pairs: [],
+        metadata: { originalList1Length: 2, originalList2Length: 2, processingTimeMs: 1 }
+      });
+      await calculationPromise;
+    });
+
+    expect(result.current.loading).toBe(false);
+  });
+
+  test('handles empty arrays', async () => {
+    const mockInput = { list1: [], list2: [] };
+    const mockResult: DistanceCalculationResult = {
+      totalDistance: 0,
+      pairs: [],
+      metadata: {
+        originalList1Length: 0,
+        originalList2Length: 0,
+        processingTimeMs: 0.1
+      }
+    };
+
+    mockCalculateDistance.mockResolvedValueOnce(mockResult);
+
+    const { result } = renderHook(() => useDistanceCalculation());
+
+    await act(async () => {
+      await result.current.calculateDistance(mockInput);
+    });
+
+    expect(result.current.result).toEqual(mockResult);
+    expect(result.current.result!.totalDistance).toBe(0);
+    expect(result.current.result!.pairs).toHaveLength(0);
+  });
+});
+
+describe('useHealthCheck hook', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('initial state is correct', () => {
+    const { result } = renderHook(() => useHealthCheck());
+
+    expect(result.current.loading).toBe(false);
+    expect(result.current.status).toBeNull();
+    expect(result.current.error).toBeNull();
+    expect(typeof result.current.checkHealth).toBe('function');
+  });
+
+  test('handles successful health check', async () => {
+    const mockStatus: HealthStatus = {
+      status: 'healthy',
+      timestamp: '2025-07-30T12:00:00Z',
+      uptime: 3600
+    };
+
+    mockHealthCheck.mockResolvedValueOnce(mockStatus);
+
+    const { result } = renderHook(() => useHealthCheck());
+
+    await act(async () => {
+      await result.current.checkHealth();
+    });
+
+    expect(result.current.loading).toBe(false);
+    expect(result.current.status).toEqual(mockStatus);
+    expect(result.current.error).toBeNull();
+  });
+
+  test('handles unhealthy server', async () => {
+    const mockStatus: HealthStatus = {
+      status: 'unhealthy',
+      timestamp: '2025-07-30T12:00:00Z',
+      uptime: 3600
+    };
+
+    mockHealthCheck.mockResolvedValueOnce(mockStatus);
+
+    const { result } = renderHook(() => useHealthCheck());
+
+    await act(async () => {
+      await result.current.checkHealth();
+    });
+
+    expect(result.current.status?.status).toBe('unhealthy');
+  });
+
+  test('handles health check error', async () => {
+    const mockError = new Error('Service unavailable');
+
+    mockHealthCheck.mockRejectedValueOnce(mockError);
+
+    const { result } = renderHook(() => useHealthCheck());
+
+    await act(async () => {
+      await result.current.checkHealth();
+    });
+
+    expect(result.current.loading).toBe(false);
+    expect(result.current.status).toBeNull();
+    expect(result.current.error).toEqual(mockError);
+  });
+
+  test('sets loading state during health check', async () => {
+    let resolveHealthCheck: (value: HealthStatus) => void;
+    
+    const healthPromise = new Promise<HealthStatus>((resolve) => {
+      resolveHealthCheck = resolve;
+    });
+
+    mockHealthCheck.mockReturnValueOnce(healthPromise);
+
+    const { result } = renderHook(() => useHealthCheck());
+
+    act(() => {
+      result.current.checkHealth();
+    });
+
+    expect(result.current.loading).toBe(true);
+
+    await act(async () => {
+      resolveHealthCheck({
+        status: 'healthy',
+        timestamp: '2025-07-30T12:00:00Z',
+        uptime: 3600
+      });
+      await healthPromise;
+    });
+
+    expect(result.current.loading).toBe(false);
+  });
+
+  test('auto-checks health on mount when enabled', async () => {
+    const mockStatus: HealthStatus = {
+      status: 'healthy',
+      timestamp: '2025-07-30T12:00:00Z',
+      uptime: 3600
+    };
+
+    mockHealthCheck.mockResolvedValueOnce(mockStatus);
+
+    renderHook(() => useHealthCheck({ autoCheck: true }));
+
+    // Wait for the auto health check to complete
+    await act(async () => {
+      await new Promise(resolve => setTimeout(resolve, 0));
+    });
+
+    expect(mockHealthCheck).toHaveBeenCalled();
+  });
+
+  test('does not auto-check health when disabled', () => {
+    renderHook(() => useHealthCheck({ autoCheck: false }));
+
+    expect(mockHealthCheck).not.toHaveBeenCalled();
+  });
+});

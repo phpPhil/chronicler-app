@@ -1,0 +1,46 @@
+{
+  "title": "Chronicle Distance Analysis Report",
+  "totalDistance": "Cumulative Distance Measure",
+  "calculatedIn": "Analysis completed in {{time}}ms",
+  "pairsProcessed": "{{count}} numerical pairs reconciled",
+  "summaryCards": {
+    "list1Length": "Primary Sequence Length",
+    "list2Length": "Secondary Sequence Length", 
+    "totalPairs": "Reconciled Pairs",
+    "processingTime": "Analysis Duration"
+  },
+  "table": {
+    "detailedBreakdown": "Comprehensive Analysis Breakdown",
+    "headers": {
+      "position": "Ordinal Position",
+      "list1Sorted": "Primary Sequence (Ordered)",
+      "list2Sorted": "Secondary Sequence (Ordered)",
+      "distance": "Distance Measure",
+      "pairNumber": "Pair"
+    }
+  },
+  "methodology": {
+    "title": "Analytical Methodology",
+    "description": "This analysis was conducted using the Manhattan distance principle:",
+    "steps": [
+      "Both numerical sequences were independently ordered",
+      "Values were systematically paired by ordinal position following ordering", 
+      "Distance calculated as absolute difference |Primary[i] - Secondary[i]| for each pair",
+      "Individual distance measures were aggregated to produce the cumulative result"
+    ]
+  },
+  "states": {
+    "processing": "Analyzing chronicle sequences...",
+    "noResults": "No analytical results available"
+  },
+  "export": {
+    "csvHeaders": {
+      "position": "Position",
+      "list1Value": "List1Value", 
+      "list2Value": "List2Value",
+      "distance": "Distance"
+    },
+    "csvFilename": "distance-calculation-results.csv",
+    "jsonFilename": "distance-calculation-results.json"
+  }
+}

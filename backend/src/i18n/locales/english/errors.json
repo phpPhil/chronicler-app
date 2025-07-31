@@ -1,0 +1,24 @@
+{
+  "api": {
+    "fileNotProvided": "Chronicle document not provided",
+    "invalidFileFormat": "Invalid chronicle format",
+    "fileEmpty": "Chronicle document is empty",
+    "fileTooLarge": "Chronicle document exceeds size limit",
+    "parsingError": "Unable to parse chronicle sequences",
+    "calculationError": "Distance analysis failed",
+    "internalError": "Internal processing error occurred",
+    "networkError": "Network communication error",
+    "timeout": "Chronicle processing timeout"
+  },
+  "validation": {
+    "invalidData": "Chronicle data format invalid",
+    "insufficientData": "Insufficient data for analysis",
+    "corruptedFile": "Chronicle document corrupted",
+    "unsupportedFormat": "Chronicle format not supported"
+  },
+  "processing": {
+    "analysisInterrupted": "Distance analysis was interrupted",
+    "memoryExceeded": "Processing memory limit exceeded",
+    "unexpectedError": "Unexpected processing error"
+  }
+}

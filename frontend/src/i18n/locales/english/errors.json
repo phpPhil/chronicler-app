@@ -1,0 +1,27 @@
+{
+  "upload": {
+    "failed": "Chronicle archival failed",
+    "invalidFile": "Invalid chronicle document"
+  },
+  "calculation": {
+    "failed": "Distance analysis failed",
+    "networkError": "Chronicle repository communication error occurred",
+    "validationError": "Chronicle validation error"
+  },
+  "retry": {
+    "available": "This error can be resolved through retry",
+    "unavailable": "This error requires manual intervention"
+  },
+  "system": {
+    "boundary": {
+      "title": "Something went wrong",
+      "titleScholar": "An unexpected error has occurred",
+      "message": "We encountered an unexpected problem. Your data is safe.",
+      "messageScholar": "An unforeseen circumstance has arisen. Your data remains secure.",
+      "action": "Try again",
+      "actionScholar": "Attempt recovery",
+      "reload": "Reload page",
+      "reloadScholar": "Refresh application"
+    }
+  }
+}

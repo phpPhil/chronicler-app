@@ -1,0 +1,35 @@
+{
+  "buttons": {
+    "browse": "select from archive",
+    "tryAgain": "Retry Analysis",
+    "calculateNew": "Perform New Analysis",
+    "exportCsv": "Export Chronicle (CSV)",
+    "exportJson": "Export Chronicle (JSON)"
+  },
+  "states": {
+    "uploading": "archiving",
+    "calculating": "analyzing",
+    "completed": "analysis complete",
+    "loading": "Preparing...",
+    "processing": "Analysis in progress...",
+    "validating": "Validating chronicle...",
+    "ready": "Ready for archival",
+    "success": "Analysis successful",
+    "error": "Processing error"
+  },
+  "units": {
+    "bytes": "Bytes",
+    "kb": "KB", 
+    "mb": "MB",
+    "gb": "GB",
+    "ms": "ms",
+    "pairs": "pairs",
+    "processed": "processed"
+  },
+  "accessibility": {
+    "uploadZone": "Chronicle submission area. Place {{fileTypes}} document here, or select to choose from archive.",
+    "progressBar": "Chronicle archival progress",
+    "calculating": "Performing distance analysis",
+    "tableBreakdown": "Comprehensive distance analysis pairs breakdown"
+  }
+}

@@ -2,8 +2,14 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders chronicler app', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const headingElement = screen.getByText(/chronicler/i);
+  expect(headingElement).toBeInTheDocument();
+});
+
+test('renders upload instructions', () => {
+  render(<App />);
+  const instructionsElement = screen.getByText(/upload your text file/i);
+  expect(instructionsElement).toBeInTheDocument();
 });

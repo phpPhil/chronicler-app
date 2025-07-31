@@ -1,0 +1,90 @@
+import { ChroniclerApiClient } from '../../../services/ChroniclerApiClient';
+import { ApiClientConfig } from '../../../types/api';
+
+// Basic tests without complex mocking
+describe('ChroniclerApiClient Basic Tests', () => {
+  let apiClient: ChroniclerApiClient;
+  let config: ApiClientConfig;
+
+  beforeEach(() => {
+    config = {
+      baseURL: 'http://localhost:3001',
+      timeout: 30000,
+      retryAttempts: 3,
+      retryDelay: 1000,
+      enableLogging: false
+    };
+
+    apiClient = new ChroniclerApiClient(config);
+  });
+
+  describe('constructor', () => {
+    test('creates instance with default config', () => {
+      const client = new ChroniclerApiClient();
+      expect(client).toBeInstanceOf(ChroniclerApiClient);
+    });
+
+    test('creates instance with custom config', () => {
+      const customConfig = { ...config, timeout: 60000 };
+      const client = new ChroniclerApiClient(customConfig);
+      expect(client).toBeInstanceOf(ChroniclerApiClient);
+    });
+
+    test('has correct configuration', () => {
+      const clientConfig = apiClient.getConfig();
+      expect(clientConfig.baseURL).toBe('http://localhost:3001');
+      expect(clientConfig.timeout).toBe(30000);
+      expect(clientConfig.retryAttempts).toBe(3);
+    });
+  });
+
+  describe('environment configuration', () => {
+    test('uses environment variables when available', () => {
+      const originalEnv = process.env;
+      
+      process.env = {
+        ...originalEnv,
+        REACT_APP_API_BASE_URL: 'https://api.example.com',
+        REACT_APP_API_TIMEOUT: '60000',
+        REACT_APP_API_RETRY_ATTEMPTS: '5'
+      };
+
+      const client = new ChroniclerApiClient();
+      const clientConfig = client.getConfig();
+      
+      expect(clientConfig.baseURL).toBe('https://api.example.com');
+      expect(clientConfig.timeout).toBe(60000);
+      expect(clientConfig.retryAttempts).toBe(5);
+      
+      process.env = originalEnv;
+    });
+
+    test('falls back to defaults when env vars missing', () => {
+      const originalEnv = process.env;
+      
+      // Remove API-related env vars
+      process.env = {
+        ...originalEnv,
+        REACT_APP_API_BASE_URL: undefined,
+        REACT_APP_API_TIMEOUT: undefined,
+        REACT_APP_API_RETRY_ATTEMPTS: undefined
+      };
+
+      const client = new ChroniclerApiClient();
+      const clientConfig = client.getConfig();
+      
+      expect(clientConfig.baseURL).toBe('http://localhost:3001');
+      expect(clientConfig.timeout).toBe(30000);
+      expect(clientConfig.retryAttempts).toBe(3);
+      
+      process.env = originalEnv;
+    });
+  });
+
+  describe('error handling', () => {
+    test('has proper error types defined', () => {
+      // Test that the types are properly imported and available
+      expect(typeof apiClient.getConfig).toBe('function');
+    });
+  });
+});

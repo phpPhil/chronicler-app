@@ -1,0 +1,389 @@
+/**
+ * Chronicler Brand System - Elvish Professional Standards
+ * 
+ * Complete CSS foundation implementing the official brand guide
+ * for authentic elvish professional user experience
+ */
+
+/* ===== FONT LOADING ===== */
+/* Fonts are loaded dynamically via JavaScript for better control */
+
+/* ===== ELVISH BRAND COLOR PALETTE ===== */
+:root {
+  /* Primary Colors - Core Elvish Identity */
+  --elrond-silver: #C0C0C0;     /* The wisdom of ages, clean precision */
+  --mithril-white: #F8F8FF;     /* Pure backgrounds, scholarly clarity */
+  --rivendell-blue: #4169E1;    /* Deep knowledge, trusted authority */
+
+  /* Secondary Colors - Cultural Depth */
+  --mallorn-gold: #B8860B;      /* Accent color, precious knowledge highlights */
+  --forest-shadow: #2F4F4F;     /* Subtle depth, ancient wisdom */
+  --starlight: #E6E6FA;         /* Gentle backgrounds, soft illumination */
+
+  /* Contextual Colors - Professional Communication */
+  --success-leaf: #228B22;      /* Successful reconciliation (nod to Shire) */
+  --warning-amber: #FF8C00;     /* Attention required, gentle urgency */
+  --error-crimson: #B22222;     /* Critical issues, elvish restraint */
+  --info-crystal: #E0F6FF;      /* Additional information, crystalline clarity */
+
+  /* Color Variations - Professional Palette Extensions */
+  --elrond-silver-light: #D3D3D3;
+  --elrond-silver-dark: #A8A8A8;
+  --rivendell-blue-light: #6495ED;
+  --rivendell-blue-dark: #1E3A8A;
+  --mallorn-gold-light: #DAA520;
+  --mallorn-gold-dark: #9B7500;
+  --forest-shadow-light: #4F6F6F;
+  --forest-shadow-dark: #1F3F3F;
+
+  /* ===== ELVISH TYPOGRAPHY SYSTEM ===== */
+  
+  /* Primary Font Family - Scholarly Gravitas with Fallback */
+  --font-tengwar-professional: 'Tengwar Annatar', 'Times New Roman', Georgia, serif;
+  --font-tengwar-fallback: 'Times New Roman', Georgia, serif;
+  
+  /* Secondary Font Family - Clean Precision */
+  --font-westron-clear: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Professional Font Hierarchy - Brand Guide Compliant */
+  --font-size-h1: 2.25rem;      /* 36px - Document Titles */
+  --font-size-h2: 1.875rem;     /* 30px - Major Sections */
+  --font-size-h3: 1.5rem;       /* 24px - Subsections */
+  --font-size-h4: 1.25rem;      /* 20px - Detail Headers */
+
+  /* Scholarly Text Sizes - Comfortable Reading */
+  --font-size-body-primary: 1.125rem;   /* 18px - Main content, comfortable reading */
+  --font-size-body-standard: 1rem;      /* 16px - Standard interface text */
+  --font-size-body-detail: 0.875rem;    /* 14px - Technical details, metadata */
+  --font-size-body-caption: 0.75rem;    /* 12px - Fine print, attribution */
+
+  /* Line Heights - Scholarly Precision */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.6;
+  --line-height-loose: 1.8;
+
+  /* Font Weights - Professional Hierarchy */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ===== GOLDEN RATIO SPACING SYSTEM ===== */
+  
+  /* Precision Spacing Scale - Rivendell Approach */
+  --spacing-xs: 6px;    /* Fine details, inline elements */
+  --spacing-sm: 12px;   /* Standard component padding */
+  --spacing-md: 24px;   /* Section spacing */
+  --spacing-lg: 36px;   /* Major component separation */
+  --spacing-xl: 48px;   /* Page section breaks */
+  --spacing-xxl: 72px;  /* Hero sections, chapter breaks */
+
+  /* Component-Specific Spacing */
+  --spacing-component-inner: var(--spacing-sm);
+  --spacing-component-outer: var(--spacing-md);
+  --spacing-section: var(--spacing-lg);
+  --spacing-page: var(--spacing-xl);
+
+  /* ===== PROFESSIONAL BORDER RADIUS ===== */
+  
+  /* Refined Element Radii */
+  --radius-sm: 4px;     /* Buttons, small elements */
+  --radius-md: 8px;     /* Cards, inputs */
+  --radius-lg: 12px;    /* Major containers */
+  --radius-full: 50%;   /* Circular elements */
+
+  /* ===== ELVISH PROFESSIONAL SHADOWS ===== */
+  
+  /* Scholarly Shadow System */
+  --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);      /* Gentle elevation */
+  --shadow-standard: 0 4px 16px rgba(0, 0, 0, 0.1);     /* Standard depth */
+  --shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.15);    /* Prominent elements */
+  --shadow-floating: 0 12px 32px rgba(0, 0, 0, 0.2);    /* Modal overlays */
+
+  /* Brand-Specific Shadows */
+  --shadow-rivendell: 0 4px 12px rgba(65, 105, 225, 0.25);   /* Rivendell Blue accent */
+  --shadow-mallorn: 0 4px 12px rgba(184, 134, 11, 0.25);     /* Mallorn Gold accent */
+
+  /* ===== PROFESSIONAL TRANSITIONS ===== */
+  
+  /* Smooth, Professional Animation */
+  --transition-fast: 0.15s ease;
+  --transition-standard: 0.25s ease;
+  --transition-slow: 0.3s ease;
+  --transition-scholarly: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* ===== Z-INDEX SYSTEM ===== */
+  
+  /* Professional Layer Management */
+  --z-dropdown: 1000;
+  --z-sticky: 1010;
+  --z-fixed: 1020;
+  --z-modal-backdrop: 1030;
+  --z-modal: 1040;
+  --z-popover: 1050;
+  --z-tooltip: 1060;
+  --z-toast: 1070;
+
+  /* ===== BREAKPOINTS (for reference) ===== */
+  
+  /* Professional Responsive Standards */
+  --breakpoint-mobile: 320px;      /* Mobile Professional */
+  --breakpoint-tablet: 768px;      /* Tablet Workspace */
+  --breakpoint-desktop: 1024px;    /* Desktop Workspace */
+  --breakpoint-large: 1440px;      /* Large Display */
+}
+
+/* ===== FONT FACE DECLARATIONS ===== */
+
+/* Fonts are loaded dynamically via JavaScript FontFace API for better control */
+
+/* ===== GLOBAL BASE STYLES ===== */
+
+/* Reset with Elvish Professional Standards */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Root Element - Elvish Foundation */
+html {
+  font-size: 16px; /* Base font size for rem calculations */
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* Body - Scholarly Base */
+body {
+  font-family: var(--font-westron-clear);
+  font-size: var(--font-size-body-standard);
+  line-height: var(--line-height-normal);
+  color: var(--forest-shadow);
+  background-color: var(--mithril-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== TYPOGRAPHY CLASSES ===== */
+
+/* Heading Hierarchy - Professional Standards */
+.heading-primary {
+  font-family: var(--font-tengwar-professional);
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--forest-shadow);
+  margin-bottom: var(--spacing-md);
+}
+
+.heading-secondary {
+  font-family: var(--font-tengwar-professional);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--forest-shadow);
+  margin-bottom: var(--spacing-sm);
+}
+
+.heading-tertiary {
+  font-family: var(--font-tengwar-professional);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  color: var(--forest-shadow);
+  margin-bottom: var(--spacing-sm);
+}
+
+.heading-quaternary {
+  font-family: var(--font-westron-clear);
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  color: var(--forest-shadow);
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Body Text - Scholarly Precision */
+.text-primary {
+  font-size: var(--font-size-body-primary);
+  line-height: var(--line-height-relaxed);
+  color: var(--forest-shadow);
+}
+
+.text-standard {
+  font-size: var(--font-size-body-standard);
+  line-height: var(--line-height-normal);
+  color: var(--forest-shadow);
+}
+
+.text-detail {
+  font-size: var(--font-size-body-detail);
+  line-height: var(--line-height-normal);
+  color: var(--forest-shadow-light);
+}
+
+.text-caption {
+  font-size: var(--font-size-body-caption);
+  line-height: var(--line-height-normal);
+  color: var(--forest-shadow-light);
+}
+
+/* Elvish Script Classes - Enhanced with Font Loading Support */
+
+/* Tengwar text styling - complete font family support */
+.tengwar-text {
+  font-family: 'Tengwar Annatar', 'Times New Roman', Georgia, serif !important;
+  font-size: 1.1em;
+  line-height: var(--line-height-relaxed);
+  letter-spacing: 0.025em;
+  transition: font-family 0.3s ease;
+  font-feature-settings: normal;
+  font-variant: normal;
+}
+
+/* Standard text styling - explicitly prevent Tengwar font */
+.standard-text {
+  font-family: var(--font-westron-clear) !important;
+  letter-spacing: normal;
+}
+
+/* Tengwar font not available - graceful fallback */
+[data-tengwar-loaded="false"] .tengwar-text,
+:not([data-tengwar-loaded]) .tengwar-text {
+  font-family: var(--font-tengwar-fallback);
+  font-style: italic;
+  color: var(--forest-shadow);
+}
+
+.tengwar-text--fallback {
+  font-family: var(--font-tengwar-fallback);
+  font-style: italic;
+  color: var(--forest-shadow);
+}
+
+/* Loading state for Tengwar text */
+.tengwar-text--loading {
+  opacity: 0.5;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Color Utilities */
+.text-rivendell { color: var(--rivendell-blue); }
+.text-mallorn { color: var(--mallorn-gold); }
+.text-forest { color: var(--forest-shadow); }
+.text-success { color: var(--success-leaf); }
+.text-warning { color: var(--warning-amber); }
+.text-error { color: var(--error-crimson); }
+
+.bg-mithril { background-color: var(--mithril-white); }
+.bg-starlight { background-color: var(--starlight); }
+.bg-rivendell { background-color: var(--rivendell-blue); }
+.bg-mallorn { background-color: var(--mallorn-gold); }
+
+/* Spacing Utilities */
+.mt-xs { margin-top: var(--spacing-xs); }
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mt-xl { margin-top: var(--spacing-xl); }
+
+.mb-xs { margin-bottom: var(--spacing-xs); }
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+.mb-xl { margin-bottom: var(--spacing-xl); }
+
+.p-xs { padding: var(--spacing-xs); }
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+.p-xl { padding: var(--spacing-xl); }
+
+/* Layout Utilities */
+.container-scholarly {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.card-professional {
+  background: var(--mithril-white);
+  border: 1px solid var(--elrond-silver);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-subtle);
+  transition: box-shadow var(--transition-standard);
+}
+
+.card-professional:hover {
+  box-shadow: var(--shadow-standard);
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+
+/* Focus Management */
+.focus-ring {
+  outline: 2px solid var(--rivendell-blue);
+  outline-offset: 2px;
+}
+
+/* Screen Reader Support */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  :root {
+    --elrond-silver: #999999;
+    --forest-shadow: #000000;
+    --rivendell-blue: #0000CC;
+    --mallorn-gold: #CC8800;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+  
+  .tengwar-text {
+    font-family: serif;
+    font-style: italic;
+  }
+}

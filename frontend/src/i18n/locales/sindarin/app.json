@@ -1,0 +1,16 @@
+{
+  "title": "Pennas",
+  "subtitle": "Ortho dhîn teithant sui govanno far edaid tîr list",
+  "header": {
+    "sindarinToggle": "Sindarin",
+    "hobbitishToggle": "Periannath-lam"
+  },
+  "workflow": {
+    "step": "Thail",
+    "progress": "Daer"
+  },
+  "error": {
+    "title": "Gorth",
+    "calculationError": "Govannen Gorth"
+  }
+}

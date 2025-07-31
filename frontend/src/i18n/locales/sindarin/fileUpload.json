@@ -1,0 +1,37 @@
+{
+  "title": "Rond Teithaint",
+  "instructions": {
+    "dragDrop": "Thúrin ha leithin dhîn teithant hain",
+    "tapToSelect": "Tabh sui etheri ennas teitho",
+    "orClickHere": "egor tabh na vae sen sui etheri",
+    "orBrowse": "egor {{browseLink}} sui etheri",
+    "orText": "egor",
+    "toSelect": "sui etheri o dhôl"
+  },
+  "fileInfo": {
+    "preview": "Tirith:",
+    "previewEllipsis": "..."
+  },
+  "requirements": {
+    "acceptedFormats": "Celair orthant: {{formats}}",
+    "maxSize": "Vorn daer: {{size}}",
+    "formatDescription": "Teithant tul sui garthen tâd thurin edaid nodint"
+  },
+  "progress": {
+    "uploaded": "{{percent}}% orthant"
+  },
+  "status": {
+    "uploadSuccess": "Teithant orthant vuin!",
+    "validationFailed": "Gorthad teithant: {{error}}"
+  },
+  "validation": {
+    "invalidFileType": "Ennin {{types}} teithant.",
+    "fileTooLarge": "Teithant tul sui luin vi {{maxSize}}.",
+    "invalidFormat": "Teithant tul sui garthen tâd thurin edaid nodint."
+  },
+  "screenReader": {
+    "validFile": "Teithant van ha adar sui ortho.",
+    "uploadComplete": "Orthad end vuin.",
+    "uploadProgress": "Ortho... {{percent}}% orthant"
+  }
+}

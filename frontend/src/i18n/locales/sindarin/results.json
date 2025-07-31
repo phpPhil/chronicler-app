@@ -1,0 +1,46 @@
+{
+  "title": "Govannen Sarch",
+  "totalDistance": "Far Vuin",
+  "calculatedIn": "Govant vi {{time}}ms",
+  "pairsProcessed": "{{count}} tîr orthant",
+  "summaryCards": {
+    "list1Length": "List Minui And",
+    "list2Length": "List Tadui And", 
+    "totalPairs": "Tîr Vuin",
+    "processingTime": "Govannen Lû"
+  },
+  "table": {
+    "detailedBreakdown": "Orthad Thand",
+    "headers": {
+      "position": "Stad",
+      "list1Sorted": "List Minui (Orchant)",
+      "list2Sorted": "List Tadui (Orchant)",
+      "distance": "Far",
+      "pairNumber": "Tîr"
+    }
+  },
+  "methodology": {
+    "title": "Govannen Thail",
+    "description": "Hon redh govant vi Manhattan far thail:",
+    "steps": [
+      "Edaid lîn lists orchant edrein",
+      "Nodint tirnen vi stad sui orchant", 
+      "Far govant sui |List1[i] - List2[i]| an cain tîr",
+      "Edain fîr vuin an vuin"
+    ]
+  },
+  "states": {
+    "processing": "Govannen dhîn lîn...",
+    "noResults": "Redh úan"
+  },
+  "export": {
+    "csvHeaders": {
+      "position": "Stad",
+      "list1Value": "List1Tirn", 
+      "list2Value": "List2Tirn",
+      "distance": "Far"
+    },
+    "csvFilename": "far-govad-redh.csv",
+    "jsonFilename": "far-govad-redh.json"
+  }
+}

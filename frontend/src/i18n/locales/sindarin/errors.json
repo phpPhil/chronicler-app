@@ -1,0 +1,27 @@
+{
+  "upload": {
+    "failed": "Orthad farn",
+    "invalidFile": "Teithant gûr"
+  },
+  "calculation": {
+    "failed": "Govannen farn",
+    "networkError": "Rond gorth orthant",
+    "validationError": "Gorthad gorth"
+  },
+  "retry": {
+    "available": "Hon gorth tul athrabeth",
+    "unavailable": "Hon gorth ú-del athrabeth"
+  },
+  "system": {
+    "boundary": {
+      "title": "Rhaw garn",
+      "titleScholar": "Gorth ú-chennen orthannen",
+      "message": "Gorth ú-velien acharn. I wilith nín orthad.",
+      "messageScholar": "Gorth ú-velien orthannen. I wilith vuin orthad ah thurin.",
+      "action": "Athrabeth vuin",
+      "actionScholar": "Orthad nestadren",
+      "reload": "Athrabeth echuir",
+      "reloadScholar": "Erein echuir orthant"
+    }
+  }
+}
