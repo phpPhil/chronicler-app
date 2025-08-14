@@ -2,13 +2,15 @@
 name: Testing Framework CI/CD
 
 on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main ]
-  schedule:
-    # Run nightly performance tests
-    - cron: '0 2 * * *'
+  # Disabled all automatic triggers - workflow can only be run manually
+  workflow_dispatch:
+  # push:
+  #   branches: [ main, develop ]
+  # pull_request:
+  #   branches: [ main ]
+  # schedule:
+  #   # Run nightly performance tests
+  #   - cron: '0 2 * * *'
 
 env:
   NODE_VERSION: '18'
